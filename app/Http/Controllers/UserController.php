@@ -35,7 +35,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Don't forget add validations here!!!
+
+        $user = User::factory()->create([
+            'name' => $request->name, 
+            'alias' => $request->alias, 
+            'avatar' => $request->avatar, 
+        ]);
+
+        $user->save();
     }
 
     /**

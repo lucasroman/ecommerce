@@ -18,4 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::get('/users/create', [UserController::class, 'create'])
+    ->name('users.create');

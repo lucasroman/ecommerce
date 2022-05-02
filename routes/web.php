@@ -41,5 +41,5 @@ Route::get('/users/create', [UserController::class, 'create'])
     ->name('users.create');
 
 // users.store
-Route::post('/users' [UserController::class, 'store'])
+Route::post('/users', [UserController::class, 'store'])
     ->name('users.store');

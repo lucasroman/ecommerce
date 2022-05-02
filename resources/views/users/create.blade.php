@@ -15,7 +15,7 @@
         <div class="container">
             <h3>Create user</h3>
 
-            <form action="#" method="post">
+            <form action="{{ route('users.store') }}" method="post">
                 @csrf
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>

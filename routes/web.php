@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/users/create', function() {
+    return 'URL create user exist!';
+})->name('users.create');

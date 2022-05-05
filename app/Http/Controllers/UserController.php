@@ -36,8 +36,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // Don't forget add validations here!!!
-        
+        $validated = $request->validate([
+            'name' => 'required', 
+            'alias' => 'required', 
+            'avatar' => 'required|file|mimes:jpg,bmp,png|dimensions:max_height=200,max_width=200', 
+        ]);
+
         $avatar = $request->file('avatar');
 
         $avatarExtension = '.' . $avatar->extension();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -36,14 +37,22 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // Don't forget add validations here!!!
-        dd($request->all());
+        
+        $avatar = $request->file('avatar');
+
+        $avatarExtension = '.' . $avatar->extension();
+
+        $avatarPath = $avatar->storeAs('public/avatars', Str::snake($request->name) . $avatarExtension);
+
+        
         $user = User::create([
             'name' => $request->name, 
             'alias' => $request->alias, 
-            'avatar' => $request->avatar, 
+            'avatar' => $avatarPath,
         ]);
 
-        $user->save();
+        return redirect()->route('users.show', ['user' => $user])
+            ->with('uploadStatus', 'File uploaded successfully.');
     }
 
     /**
@@ -54,7 +63,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('users.show', ['user' => $user]);
     }
 
     /**

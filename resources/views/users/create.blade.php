@@ -11,6 +11,9 @@
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
+                @if ($errors->has('avatar'))
+                    <li>The avatar dimensions must be 200x200 pixels</li>
+                @endif
             </ul>
         </div>
     @endif

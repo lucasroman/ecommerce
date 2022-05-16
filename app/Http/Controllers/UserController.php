@@ -50,8 +50,8 @@ class UserController extends Controller
 
         
         $user = User::create([
-            'name' => $request->name, 
-            'alias' => $request->alias, 
+            'name' => Str::title($request->name), 
+            'alias' => Str::title($request->alias), 
             'avatar' => $avatarPath,
         ]);
 
@@ -78,7 +78,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
@@ -90,7 +90,14 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        // TO DO: validatios here!
+
+        $user = User::find($user->id);
+        $user->name = Str::title($request->name);
+
+        $user->save();
+
+        return redirect()->route('users.show', ['user' => $user]);
     }
 
     /**
@@ -101,6 +108,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect('/');
     }
 }

@@ -34,6 +34,4 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::resource('/users', UserController::class)->only(
-    'create', 'store', 'show'
-);
+Route::resource('/users', UserController::class);

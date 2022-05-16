@@ -18,6 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/users', UserController::class)->only(
-    'create', 'store', 'show'
-);
+Route::resource('/users', UserController::class);

@@ -24,4 +24,6 @@
             </button>
         </form>
     </div>
+
+    <a href="{{ route('users.index') }}"><button class="btn btn-primary mt-3">Back to users list</button></a>
 @endsection

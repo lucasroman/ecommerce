@@ -14,16 +14,21 @@
     
     {{-- Image to render --}}
     <img src="{{ Storage::url($user->avatar) }}" alt="Avatar image here">
+    
+    <div>
+        <a href="{{ route('users.index') }}"><button class="btn btn-primary mt-3">Back to users list</button></a>
+    </div>
 
-    <div class="mt-3">
+    <div class="m-3 position-absolute bottom-0 end-0 ">
         <form action="{{ route('users.destroy', $user) }}" method="post">
             @csrf
             @method('delete')
             <button type="submit" class="btn btn-danger">
-                Delete User
+                <div class="fa-fade">
+                    <i class="fa-xl fa-solid fa-triangle-exclamation"></i>
+                    Delete user
+                </div>
             </button>
         </form>
     </div>
-
-    <a href="{{ route('users.index') }}"><button class="btn btn-primary mt-3">Back to users list</button></a>
 @endsection

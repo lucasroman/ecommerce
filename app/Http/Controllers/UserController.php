@@ -41,7 +41,7 @@ class UserController extends Controller
         $validated = $request->validate([
             'name' => 'required', 
             'alias' => 'required', 
-            'avatar' => 'required|file|mimes:jpg,bmp,png|dimensions:max_height=200,max_width=200', 
+            'avatar' => 'required|file|mimes:jpg,bmp,png|dimensions:max_height=200,max_width=200,min_height=200,min_width=200', 
         ]);
 
         $avatar = $request->file('avatar');
@@ -112,6 +112,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect('/');
+        return redirect()->route('users.index');
     }
 }

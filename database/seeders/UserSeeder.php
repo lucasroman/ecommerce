@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+// Truncate table before to seed
+DB::table('users')->truncate();
+
 class UserSeeder extends Seeder
 {
     /**
@@ -18,7 +21,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Jhon Doe', 
             'alias' => 'Fulgore', 
-            'avatar' => 'Not image yet',
+            'avatar' => 'Not image set',
         ]);
     }
 }

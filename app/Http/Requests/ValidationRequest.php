@@ -13,7 +13,7 @@ class ValidationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class ValidationRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'alias' => 'required',
+            'avatar' => 'required|file|mimes:jpg,bmp,png|dimensions:max_height=200,max_width=200,min_height=200,min_width=200', 
         ];
     }
 }

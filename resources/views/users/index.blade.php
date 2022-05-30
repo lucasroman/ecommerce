@@ -7,15 +7,16 @@
 
 <ul class="list-group list-group-flush">
     @foreach ($users as $user)
-    <li class="list-group-item">
-        <a href="{{route('users.show', $user)}}">
+    <a href="{{route('users.show', $user)}}" class="text-decoration-none">
+        <li class="list-group-item">
             <img src="{{Storage::url($user->avatar)}}" 
                 class="img-thumbnail rounded-circle" 
                 alt="{{ $user->avatar }}" 
                 style="height: 6em">
-            {{ $user->name }}
-        </a>
-    </li>
+            <h3>{{ $user->name }}</h3>
+            <h4>"{{ $user->alias }}"</h4>
+        </li>
+    </a>
     @endforeach
 </ul>
 

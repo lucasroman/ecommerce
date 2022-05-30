@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Http\Requests\ValidationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -33,28 +34,15 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ValidationRequest
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ValidationRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required', 
-            'alias' => 'required', 
-            'avatar' => 'required|file|mimes:jpg,bmp,png|dimensions:max_height=200,max_width=200,min_height=200,min_width=200', 
-        ]);
-
-        $avatar = $request->file('avatar');
-
-        $avatarExtension = '.' . $avatar->extension();
-
-        $avatarPath = $avatar->storeAs('public/avatars', Str::snake($request->name) . $avatarExtension);
-
-        
         $user = User::create([
             'name' => Str::title($request->name), 
             'alias' => Str::title($request->alias), 
-            'avatar' => $avatarPath,
+            'avatar' => $this->makeAvatarURI($request->file('avatar'), Str::title($request->name)), 
         ]);
 
         return redirect()->route('users.show', ['user' => $user])
@@ -86,16 +74,18 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ValidationRequest
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(ValidationRequest $request, User $user)
     {
-        // TO DO: validatios here!
-
-        $user = User::find($user->id);
-        $user->name = Str::title($request->name);
+        // Validations made in 'ValidationRequest' form
+        $user->update([
+            'name' => Str::title($request->name),
+            'alias' => Str::title($request->alias), 
+            'avatar' => $this->makeAvatarURI($request->file('avatar'), Str::title($request->name)), 
+        ]);
 
         $user->save();
 
@@ -113,5 +103,23 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('users.index');
+    }
+
+    /**
+     * Auxiliar function to create avatar file name with its extension
+     * 
+     * @param $avatarFile is the avatar file name WITHOUT extension
+     * @param $username the name with which will be saved the file
+     * @return $avatarPath file path complete (see database)
+     */
+    public function makeAvatarURI($avatarFile, $username) 
+    {
+        $avatar = $avatarFile;
+
+        $avatarExtension = '.' . $avatar->extension();
+
+        $avatarPath = $avatar->storeAs('public/avatars', Str::snake($username) . $avatarExtension);
+
+        return $avatarPath;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Http\Requests\ValidationRequest;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -81,6 +82,9 @@ class UserController extends Controller
     public function update(ValidationRequest $request, User $user)
     {
         // Validations made in 'ValidationRequest' form
+
+        Storage::delete($user->avatar);
+
         $user->update([
             'name' => Str::title($request->name),
             'alias' => Str::title($request->alias), 
@@ -100,6 +104,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        Storage::delete($user->avatar);
+        
         $user->delete();
 
         return redirect()->route('users.index');

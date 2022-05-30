@@ -17,6 +17,7 @@
     
     <div>
         <a href="{{ route('users.index') }}"><button class="btn btn-primary mt-3">Back to users list</button></a>
+        <a href="{{ route('users.edit', $user) }}"><button class="btn btn-primary mt-3">Edit User</button></a>
     </div>
 
     <div class="m-3 position-absolute bottom-0 end-0 ">

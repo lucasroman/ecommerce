@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,9 +20,9 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'Jhon Doe', 
+            'name' => 'John Doe', 
             'alias' => 'Fulgore', 
-            'avatar' => 'Not image set',
+            'avatar' => 'No image file',
         ]);
     }
 }

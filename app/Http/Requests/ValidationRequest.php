@@ -26,6 +26,7 @@ class ValidationRequest extends FormRequest
         return [
             'name' => 'required',
             'alias' => 'required',
+            'email' => 'required|email|unique:users,email', 
             'avatar' => 'required|file|mimes:jpg,bmp,png|dimensions:max_height=200,max_width=200,min_height=200,min_width=200', 
         ];
     }

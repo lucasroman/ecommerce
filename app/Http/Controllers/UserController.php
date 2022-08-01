@@ -43,6 +43,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => Str::title($request->name), 
             'alias' => Str::title($request->alias), 
+            'email' => $request->email, 
             'avatar' => $this->makeAvatarURI($request->file('avatar'), Str::title($request->name)), 
         ]);
 

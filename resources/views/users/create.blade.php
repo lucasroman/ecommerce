@@ -32,9 +32,15 @@
                 value="{{ old('alias') }}">
         </div>
         <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" name="email"
+                value="{{ old('email') }}">
+        </div>
+        <div class="mb-3">
             <label for="avatar" class="form-label">Avatar</label>
             <input type="file" class="form-control" name="avatar">
         </div>
+
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
     </div>

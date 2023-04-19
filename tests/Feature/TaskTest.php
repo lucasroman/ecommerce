@@ -19,4 +19,25 @@ class TaskTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    /*
+    Input and save a task
+    
+    -1. Form route must exist.
+    *2. Form view must exist.
+    3. Can save a task.
+    4. Can't save a empty task.
+    5. Can show all tasks.
+    6. Can update task.
+
+    */
+
+    // Form for create a new task
+    public function testFormTaskMustExist()
+    {
+        $response = $this->get('/tasks/create');
+
+        $response->assertOk();
+    }
+
 }

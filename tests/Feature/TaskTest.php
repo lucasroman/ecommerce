@@ -40,4 +40,12 @@ class TaskTest extends TestCase
         $response->assertOk();
     }
 
+    // Form task have a view
+    public function testFormTaskViewMustExist()
+    {
+        $response = $this->get('/tasks/create');
+
+        $response->assertViewIs('tasks.create');
+    }
+    
 }

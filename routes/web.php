@@ -17,8 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tasks/create', function () {
-
-    return 'Route to "tasks" now exist.';
-    
-});
+Route::view('/tasks/create', 'tasks.create');

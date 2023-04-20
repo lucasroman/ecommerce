@@ -8,6 +8,8 @@ use Tests\TestCase;
 
 class TaskTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * A basic feature test example.
      *
@@ -19,20 +21,8 @@ class TaskTest extends TestCase
 
         $response->assertStatus(200);
     }
-
-    /*
-    Input and save a task
     
-    -1. Form route must exist.
-    *2. Form view must exist.
-    3. Can save a task.
-    4. Can't save a empty task.
-    5. Can show all tasks.
-    6. Can update task.
-
-    */
-
-    // Form for create a new task
+    // Task - Route to form
     public function testFormTaskMustExist()
     {
         $response = $this->get('/tasks/create');
@@ -40,7 +30,7 @@ class TaskTest extends TestCase
         $response->assertOk();
     }
 
-    // Form task have a view
+    // Task - View create
     public function testFormTaskViewMustExist()
     {
         $response = $this->get('/tasks/create');
@@ -48,4 +38,26 @@ class TaskTest extends TestCase
         $response->assertViewIs('tasks.create');
     }
     
+    // Task - Save task
+    public function testShouldCanSaveANewTask()
+    {
+        $response = $this->post('/tasks', [
+            'title' => 'Task title', 
+            'description' => 'Description of a task.', 
+        ]);
+
+        $this->assertDatabaseCount('tasks', 1);        
+    }
 }
+
+    /*
+    Input and save a task
+    
+    -1. Form route must exist.
+    -2. Form view must exist.
+    3. Can save a task.
+    4. Can't save a empty task.
+    5. Can show all tasks.
+    6. Can update task.
+
+    */

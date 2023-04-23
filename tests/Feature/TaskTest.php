@@ -41,6 +41,8 @@ class TaskTest extends TestCase
     // Task - Save task
     public function testShouldCanSaveANewTask()
     {
+        $this->assertDatabaseCount('tasks', 0);        
+
         $response = $this->post('/tasks', [
             'title' => 'Task title', 
             'description' => 'Description of a task.', 

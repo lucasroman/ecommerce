@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -10,16 +11,14 @@ class TaskTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_example()
+    public function setUp(): void
     {
-        $response = $this->get('/');
+        parent::setUp();
 
-        $response->assertStatus(200);
+        $this->task = Task::make([
+            'title' => 'Task title', 
+            'description' => 'A description of task.', 
+        ]);
     }
     
     // Task - Route to form
@@ -44,21 +43,48 @@ class TaskTest extends TestCase
         $this->assertDatabaseCount('tasks', 0);        
 
         $response = $this->post('/tasks', [
-            'title' => 'Task title', 
-            'description' => 'Description of a task.', 
+            'title' => 'Task title',
+            'description' => 'Description of a task.',
         ]);
 
         $this->assertDatabaseCount('tasks', 1);        
     }
+
+    // Task - Can't save task without title
+    public function testCantSaveATaskWithoutTitle()
+    {
+        $this->assertDatabaseCount('tasks', 0);
+
+        $response = $this->post('/tasks', [
+            'title' => '', 
+            'description' => 'Description of a task.', 
+        ]);
+
+        $this->assertDatabaseCount('tasks', 0);
+    }
+
+    // Task - Can't save task without description
+    public function testCantSaveATaskWithoutDescription()
+    {
+        $this->assertDatabaseCount('tasks', 0);
+
+        $response = $this->post('/tasks', [
+            'title' => 'Task title',
+            'description' => '',
+        ]);
+
+        $this->assertDatabaseCount('tasks', 0);
+    }
 }
 
+
     /*
-    Input and save a task
+    ? Input and save a task
     
     -1. Form route must exist.
     -2. Form view must exist.
-    3. Can save a task.
-    4. Can't save a empty task.
+    -3. Can save a task.
+    *4. Can't save a task with any empty field.
     5. Can show all tasks.
     6. Can update task.
 

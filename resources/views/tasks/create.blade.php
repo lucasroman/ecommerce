@@ -4,13 +4,13 @@
     @csrf
 
     <div>
-        <input id="done" type="checkbox">
+        <input id="done" type="checkbox" name="done" value="1">
         <label for="done">Done</label>
     </div>
 
     <div>
         <label for="title">Title</label>
-        <input id="title" type="text">
+        <input id="title" type="text" name="title">
     </div>
 
     <div>

@@ -1,3 +1,9 @@
-<h1>All Tasks</h1>
+<h1>All Tasks</h1><hr>
 
-{{ $tasks }}
+@foreach ($tasks as $task)
+    <h3>Title: {{ $task->title }}</h3>
+
+    <h3>Description: {{ $task->description }}</h3>
+    
+    <hr>
+@endforeach

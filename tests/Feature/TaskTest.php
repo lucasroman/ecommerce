@@ -75,6 +75,15 @@ class TaskTest extends TestCase
 
         $this->assertDatabaseCount('tasks', 0);
     }
+
+    public function testShouldSeeAllTasks()
+    {
+        $this->task->save();
+        
+        $response = $this->get('/tasks');
+
+        $response->assertSee($this->task->title);
+    }
 }
 
 
@@ -84,8 +93,8 @@ class TaskTest extends TestCase
     -1. Form route must exist.
     -2. Form view must exist.
     -3. Can save a task.
-    *4. Can't save a task with any empty field.
-    5. Can show all tasks.
+    - 4. Can't save a task with any empty field.
+    *5. Can show all tasks.
     6. Can update task.
 
     */

@@ -29,6 +29,8 @@ Route::get('/routemodelbinding/{task}', function (Task $task) {
     return $task;
 });
 
+Route::get('/tasks', [TaskController::class, 'index']);
+
 // Route::get('/routemodelbinding/{loquesea}', function ($num) {
 
 //     $task = Task::findOrFail($num);

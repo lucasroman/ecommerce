@@ -15,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::view('/', 'home')->name('home');
 
 Route::get('/tasks/create', [TaskController::class, 'create'])
     ->name('tasks.create');
@@ -25,15 +27,5 @@ Route::get('/tasks/create', [TaskController::class, 'create'])
 Route::post('/tasks', [TaskController::class, 'store'])
     ->name('tasks.store');
 
-Route::get('/routemodelbinding/{task}', function (Task $task) {
-    return $task;
-});
-
-Route::get('/tasks', [TaskController::class, 'index']);
-
-// Route::get('/routemodelbinding/{loquesea}', function ($num) {
-
-//     $task = Task::findOrFail($num);
-    
-//     return $task;
-// });
+Route::get('/tasks', [TaskController::class, 'index'])
+    ->name('tasks.index');

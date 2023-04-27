@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 <h1>Create Task</h1>
 
 <form method="POST" action={{ route('tasks.store') }}>
@@ -21,3 +25,5 @@
 
     <input type="submit" value="Create">
 </form>
+
+@endsection

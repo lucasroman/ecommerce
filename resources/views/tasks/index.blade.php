@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 <h1>All Tasks</h1><hr>
 
 @foreach ($tasks as $task)
@@ -7,3 +11,5 @@
     
     <hr>
 @endforeach
+
+@endsection

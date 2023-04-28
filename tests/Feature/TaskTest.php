@@ -68,7 +68,7 @@ class TaskTest extends TestCase
     {
         $this->assertDatabaseCount('tasks', 0);
 
-        $response = $this->post('/tasks', [
+        $this->post('/tasks', [
             'title' => 'Task title',
             'description' => '',
         ]);
@@ -76,6 +76,7 @@ class TaskTest extends TestCase
         $this->assertDatabaseCount('tasks', 0);
     }
 
+    // Task - Should show all task in database
     public function testShouldSeeAllTasks()
     {
         $this->task->save();
@@ -83,6 +84,21 @@ class TaskTest extends TestCase
         $response = $this->get('/tasks');
 
         $response->assertSee($this->task->title);
+    }
+
+    // Task - Should edit a task
+    public function testShouldEditATask()
+    {
+        $this->withoutExceptionHandling();
+
+        // Save current defatult task
+        $this->task->save();
+
+        $this->patch('/tasks/{$this->task}', [
+            'title' => 'Updated task title', 
+            'description' => 'Updated description task.', 
+        ])->assertRedirect(route('tasks.index'))
+            ->assertSee('Updated task title');
     }
 }
 
@@ -94,7 +110,7 @@ class TaskTest extends TestCase
     -2. Form view must exist.
     -3. Can save a task.
     - 4. Can't save a task with any empty field.
-    *5. Can show all tasks.
+    -5. Can show all tasks.
     6. Can update task.
 
     */

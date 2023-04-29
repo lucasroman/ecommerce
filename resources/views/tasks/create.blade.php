@@ -19,7 +19,7 @@
 
     <div>
         <lable for="description">Description</lable>
-        <textarea id="description" name="description" rows="4" cols="50">
+        <textarea id="description" name="description">
         </textarea>
     </div>
 

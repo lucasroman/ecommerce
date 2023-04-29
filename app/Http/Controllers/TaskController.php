@@ -59,9 +59,9 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Task $task)
     {
-        //
+        return view('tasks.edit', compact('task'));
     }
 
     /**
@@ -73,7 +73,9 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        echo 'Task update method.';
+
+
     }
 
     /**

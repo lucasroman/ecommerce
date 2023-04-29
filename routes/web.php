@@ -29,5 +29,8 @@ Route::post('/tasks', [TaskController::class, 'store'])
 Route::get('/tasks', [TaskController::class, 'index'])
     ->name('tasks.index');
 
+Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])
+    ->name('tasks.edit');
+
 Route::patch('/tasks/{task}', [TaskController::class, 'update'])
     ->name('tasks.update');

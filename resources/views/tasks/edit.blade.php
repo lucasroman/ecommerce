@@ -9,7 +9,10 @@
         @method('patch')
     {{$task->done}}
         <div>
-        <input id="done" type="checkbox" name="done" value="0">
+        {{-- Show checked checkbox or not depend of 'done' value in database--}}
+        <input id="done" type="checkbox" name="done" value="done" 
+            @checked(old('done', $task->done)) />
+            
         <label for="done">Done</label>
         </div>
 

@@ -89,16 +89,25 @@ class TaskTest extends TestCase
     // Task - Should edit a task
     public function testShouldEditATask()
     {
-        $this->withoutExceptionHandling();
-
         // Save current defatult task
         $this->task->save();
 
-        $this->patch('/tasks/{$this->task}', [
-            'title' => 'Updated task title', 
-            'description' => 'Updated description task.', 
-        ])->assertRedirect(route('tasks.index'))
-            ->assertSee('Updated task title');
+        // Check for current task title
+        $response = $this->get(route('tasks.index'));
+
+        $response->assertSeeText('Task title');
+        
+        // Send updated data to TaskController
+        $this->patch(route('tasks.update', $this->task), [
+            'done' => 1,
+            'title' => 'Updated task title',
+            'description' => 'Updated description task.',
+        ])->assertRedirect(route('tasks.index'));
+
+        // Check for current task title
+        $response = $this->get(route('tasks.index'));
+
+        $response->assertSeeText('Updated task title');
     }
 }
 
@@ -109,8 +118,8 @@ class TaskTest extends TestCase
     -1. Form route must exist.
     -2. Form view must exist.
     -3. Can save a task.
-    - 4. Can't save a task with any empty field.
+    -4. Can't save a task with any empty field.
     -5. Can show all tasks.
-    6. Can update task.
+    -6. Can update task.
 
     */

@@ -6,8 +6,8 @@
 
     <form method="POST" action="{{ route('tasks.update', $task) }}">
         @csrf
-        @method('patch')
-    {{$task->done}}
+        @method('PATCH')
+
         <div>
         {{-- Show checked checkbox or not depend of 'done' value in database--}}
         <input id="done" type="checkbox" name="done" value="done" 

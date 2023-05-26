@@ -10,10 +10,10 @@
 
         <div>
         {{-- Show checked checkbox or not depend of 'done' value in database--}}
-        <input id="done" type="checkbox" name="done" value="done" 
-            @checked(old('done', $task->done)) />
-            
         <label for="done">Done</label>
+        <input id="done" type="checkbox" name="done" value="1" 
+            @checked(old('active', $task->done))>
+            
         </div>
 
         <div>
@@ -22,7 +22,7 @@
         </div>
 
         <div>
-            <lable for="description">Description</lable>
+            <label for="description">Description</label>
             <textarea id="description" name="description" rows="" cols="">
                 {{ $task->description }}
             </textarea>

@@ -8,8 +8,8 @@
     @csrf
 
     <div>
-        <input id="done" type="checkbox" name="done" value="1">
         <label for="done">Done</label>
+        <input id="done" type="checkbox" name="done" value="1">
     </div>
 
     <div>
@@ -18,7 +18,7 @@
     </div>
 
     <div>
-        <lable for="description">Description</lable>
+        <label for="description">Description</label>
         <textarea id="description" name="description">
         </textarea>
     </div>

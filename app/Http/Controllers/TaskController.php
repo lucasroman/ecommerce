@@ -74,9 +74,12 @@ class TaskController extends Controller
     // public function update(Request $request, $id)
     public function update(Request $request, $id)
     {
+        
         $task = Task::find($id);
-
-        $task->done = $request->done;
+        
+        // Checkbox (done) give true or null. It need convert to true or false.
+        // So you need apply 'boolean' function before save. See below.
+        $task->done = $request->boolean('done');
 
         $task->title = $request->title;
 

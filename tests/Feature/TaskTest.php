@@ -109,6 +109,23 @@ class TaskTest extends TestCase
 
         $response->assertSeeText('Updated task title');
     }
+
+    // Task - Should delete a task
+    public function testShouldDeleteATask()
+    {
+        //todo Refactor this test using assertDatabaseHas and assertDatabaseMissing
+        // Save current default task
+        $this->task->save();
+
+        // Check task was saved
+        $this->assertDatabaseCount('tasks', 1);
+
+        // Delete task
+        $this->delete('tasks/' . $this->task->id);
+
+        // Check task doesn't exist
+        $this->assertDatabaseCount('tasks', 0);
+    }
 }
 
 
@@ -121,5 +138,6 @@ class TaskTest extends TestCase
     -4. Can't save a task with any empty field.
     -5. Can show all tasks.
     -6. Can update task.
+    *7. Can delete a task
 
     */

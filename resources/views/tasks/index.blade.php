@@ -7,6 +7,8 @@
 @foreach ($tasks as $task)
     <h3><b>Id</b> {{ $task->id }}</h3>
 
+    <h3><b>Status:</b> {{$task->done ? 'Done' : 'Incomplete' }}</h3>
+
     <h3><b>Title:</b> {{ $task->title }}</h3>
 
     <h3><b>Description:</b> {{ $task->description }}</h3>

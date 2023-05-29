@@ -13,9 +13,25 @@
 
     <h3><b>Description:</b> {{ $task->description }}</h3>
 
-    {{-- Edit task button --}}
-    <input type="button" class="btn btn-primary" onclick="location.href=
-        '{{ route('tasks.edit', $task->id) }}'" value="Edit JS" />
+    <div class="text-center">
+        <div class="row">
+        {{-- Edit task button --}}
+        <div class="col-sm-1 m-1">
+        <input type="button" class="btn btn-primary" 
+            onclick="location.href='{{ route('tasks.edit', $task->id) }}'" 
+            value="Edit">
+        </div>
+
+        <div class="col-sm-1 m-1">
+        {{-- Delete task button --}}
+        <form method="POST" action="{{ route('tasks.destroy', $task->id) }}">
+            @csrf
+            @method('delete')
+            <input type="submit" class="btn btn-primary" value="Delete">
+        </div>
+        </form>
+        </div>
+    </div>
     <hr>
 @endforeach
 

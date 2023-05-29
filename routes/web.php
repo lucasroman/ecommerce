@@ -34,3 +34,6 @@ Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])
 
 Route::patch('/tasks/{task}', [TaskController::class, 'update'])
     ->name('tasks.update');
+
+Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])
+    ->name('tasks.destroy');

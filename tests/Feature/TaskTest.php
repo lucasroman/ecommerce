@@ -121,10 +121,12 @@ class TaskTest extends TestCase
         $this->assertDatabaseCount('tasks', 1);
 
         // Delete task
-        $this->delete('tasks/' . $this->task->id);
+        $response = $this->delete('tasks/' . $this->task->id);
 
         // Check task doesn't exist
         $this->assertDatabaseCount('tasks', 0);
+
+        $response->assertRedirect(route('tasks.index'));
     }
 }
 
@@ -138,6 +140,7 @@ class TaskTest extends TestCase
     -4. Can't save a task with any empty field.
     -5. Can show all tasks.
     -6. Can update task.
-    *7. Can delete a task
+    -7. Can delete a task
+    *Refactor test and controller
 
     */

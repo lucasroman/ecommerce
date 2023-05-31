@@ -40,40 +40,37 @@ class TaskTest extends TestCase
     // Task - Save task
     public function testShouldCanSaveANewTask()
     {
-        $this->assertDatabaseCount('tasks', 0);        
-
-        $response = $this->post('/tasks', [
-            'title' => 'Task title',
-            'description' => 'Description of a task.',
+        $this->post('/tasks', [
+            'title' => 'Title for new task test',
+            'description' => 'Description for new task test.',
         ]);
 
-        $this->assertDatabaseCount('tasks', 1);        
+        $this->assertDatabaseHas('tasks', [
+            'title' => 'Title for new task test',
+            'description' => 'Description for new task test.',
+        ]);
     }
 
     // Task - Can't save task without title
     public function testCantSaveATaskWithoutTitle()
     {
-        $this->assertDatabaseCount('tasks', 0);
-
-        $response = $this->post('/tasks', [
+        $this->post('/tasks', [
             'title' => '', 
             'description' => 'Description of a task.', 
         ]);
 
-        $this->assertDatabaseCount('tasks', 0);
+        $this->assertDatabaseMissing('tasks', ['title' => '']);
     }
 
     // Task - Can't save task without description
     public function testCantSaveATaskWithoutDescription()
     {
-        $this->assertDatabaseCount('tasks', 0);
-
         $this->post('/tasks', [
             'title' => 'Task title',
             'description' => '',
         ]);
 
-        $this->assertDatabaseCount('tasks', 0);
+        $this->assertDatabaseMissing('tasks', ['description' => '' ]);
     }
 
     // Task - Should show all task in database
@@ -113,23 +110,21 @@ class TaskTest extends TestCase
     // Task - Should delete a task
     public function testShouldDeleteATask()
     {
-        //todo Refactor this test using assertDatabaseHas and assertDatabaseMissing
         // Save current default task
         $this->task->save();
 
         // Check task was saved
-        $this->assertDatabaseCount('tasks', 1);
+        $this->assertDatabaseHas('tasks', $this->task->toArray());
 
         // Delete task
         $response = $this->delete('tasks/' . $this->task->id);
 
         // Check task doesn't exist
-        $this->assertDatabaseCount('tasks', 0);
+        $this->assertDatabaseMissing('tasks', $this->task->toArray());
 
         $response->assertRedirect(route('tasks.index'));
     }
 }
-
 
     /*
     ? Input and save a task
@@ -141,6 +136,6 @@ class TaskTest extends TestCase
     -5. Can show all tasks.
     -6. Can update task.
     -7. Can delete a task
-    *Refactor test and controller
+    -Refactor test and controller
 
     */

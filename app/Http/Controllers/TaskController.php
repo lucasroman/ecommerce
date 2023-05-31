@@ -37,9 +37,11 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        //todo Add validations here
+
         Task::create($request->all());
 
-        return redirect()->route('tasks.create');
+        return redirect()->route('tasks.index');
     }
 
     /**
@@ -72,20 +74,17 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     // public function update(Request $request, $id)
-    public function update(Request $request, $id)
+    public function update(Request $request, Task $task)
     {
-        
-        $task = Task::find($id);
-        
         // Checkbox (done) give true or null. It need convert to true or false.
         // So you need apply 'boolean' function before save. See below.
-        $task->done = $request->boolean('done');
-
-        $task->title = $request->title;
-
-        $task->description = $request->description;
+        $task->update([
+            'done' => $request->boolean('done'), 
+            'title' => $request->title, 
+            'description' => $request->description, 
+        ]);
         
-        $task->save($request->all());
+        $task->save();
         
         return redirect()->route('tasks.index');
     }
@@ -96,10 +95,8 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Task $task)
     {
-        $task = Task::find($id);
-
         $task->delete();
 
         return redirect()->route('tasks.index');

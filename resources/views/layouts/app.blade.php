@@ -8,18 +8,15 @@
 
     {{-- Bootstrap 5.3 CSS --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"></head>
-<body>
+    
+<body class="container">
     <div class="ms-3 mt-3">
-        <a class="text-decoration-none" href="{{route('home')}}">
-            <button class="btn btn-warning" type="button"> 
-                Back to Home
-            </button>
+        <a class="btn btn-warning" href="{{route('home')}}">
+            Back to Home
         </a>
         
-        <a class="text-decoration-none" href="{{route('tasks.create')}}">
-            <button class="btn btn-primary" type="button">
-                Create
-            </button>
+        <a class="btn btn-warning" href="{{route('tasks.create')}}">
+            Create Task
         </a>
     </div>
 

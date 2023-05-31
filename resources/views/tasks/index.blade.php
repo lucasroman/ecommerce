@@ -15,20 +15,21 @@
 
     <div class="d-flex gap-2 ms-3">
         {{-- Edit task button --}}
-        <a href="{{ route('tasks.edit', $task->id) }}">
-            <button class="btn btn-primary rounded-pill px-3" type="button">
+        <a href="{{ route('tasks.edit', $task->id) }}" 
+            class="btn btn-primary rounded-pill px-3" type="button">
                 Edit
-            </button>
         </a>
         
         {{-- Delete task button --}}
         <form method="POST" action="{{ route('tasks.destroy', $task->id) }}">
             @csrf
             @method('delete')
+            
             <input class="btn btn-primary rounded-pill px-3" 
+                onclick="return confirm('Are you sure?')"
                 type="submit" value="Delete">
         </form>
-        
+
     </div>
 
     <hr>

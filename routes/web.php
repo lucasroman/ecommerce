@@ -37,3 +37,7 @@ Route::patch('/tasks/{task}', [TaskController::class, 'update'])
 
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])
     ->name('tasks.destroy');
+
+Route::get('/tasks/{task}', function() {
+    return 'Route to show task exist.';
+});

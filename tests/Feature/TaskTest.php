@@ -124,18 +124,18 @@ class TaskTest extends TestCase
 
         $response->assertRedirect(route('tasks.index'));
     }
+
+    // Task - Route to task show exist
+    public function testTaskShowShouldExist()
+    {
+        $response = $this->get('/tasks/{$this->task->id}');
+
+        $response->assertOk();
+    }
 }
 
     /*
-    ? Input and save a task
-    
-    -1. Form route must exist.
-    -2. Form view must exist.
-    -3. Can save a task.
-    -4. Can't save a task with any empty field.
-    -5. Can show all tasks.
-    -6. Can update task.
-    -7. Can delete a task
-    -Refactor test and controller
-
+    -1. Check route to task show exist
+    2. Check show task view exist
+    3. Check can see whole task data in show task view
     */

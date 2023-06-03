@@ -4,35 +4,35 @@
 
 <h1>All Tasks</h1><hr>
 
+<div class="d-flex container-fluid">
 @foreach ($tasks as $task)
-    <h3><b>Id</b> {{ $task->id }}</h3>
+    <div class="card me-3" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{$task->title}}</h5>
 
-    <h3><b>Status:</b> {{$task->done ? 'Done' : 'Incomplete' }}</h3>
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+                {{$task->done ? 'Done' : 'Incomplete'}}
+            </h6>
 
-    <h3><b>Title:</b> {{ $task->title }}</h3>
+            <p class="card-text">{{$task->description}}</p>
 
-    <h3><b>Description:</b> {{ $task->description }}</h3>
+            {{-- Edit task button --}}
+            <div class="d-flex gap-2 ms-3">
+            <a class="btn btn-primary rounded-pill px-3" 
+                href="{{route('tasks.edit', $task->id)}}">Edit</a>
 
-    <div class="d-flex gap-2 ms-3">
-        {{-- Edit task button --}}
-        <a href="{{ route('tasks.edit', $task->id) }}" 
-            class="btn btn-primary rounded-pill px-3" type="button">
-                Edit
-        </a>
+            {{-- Delete task button --}}
+            <form method="POST" action="{{route('tasks.destroy', $task->id)}}">
+                @csrf
+                @method('DELETE')
+                <input class="btn btn-primary rounded-pill px-3" 
+                onclick="return confirm('Are you sure you want to delete this task?')" type="submit" value="Delete">
+            </form>
+            </div>
+        </div>
+        </div>
         
-        {{-- Delete task button --}}
-        <form method="POST" action="{{ route('tasks.destroy', $task->id) }}">
-            @csrf
-            @method('delete')
-            
-            <input class="btn btn-primary rounded-pill px-3" 
-                onclick="return confirm('Are you sure?')"
-                type="submit" value="Delete">
-        </form>
-
-    </div>
-
-    <hr>
 @endforeach
+</div>
 
 @endsection

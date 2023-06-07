@@ -126,16 +126,27 @@ class TaskTest extends TestCase
     }
 
     // Task - Route to task show exist
-    public function testTaskShowShouldExist()
+    public function testTaskShowRouteShouldExist()
     {
-        $response = $this->get('/tasks/{$this->task->id}');
+        $response = $this->get("/tasks/{$this->task->id}");
 
         $response->assertOk();
+    }
+
+    // Task - Show task view should exist
+    public function testTaskShowViewShouldExist()
+    {
+        // To show a task must be saved previously
+        $this->task->save();
+        
+        $response = $this->get("/tasks/{$this->task->id}");
+
+        $response->assertViewIs('tasks.show');
     }
 }
 
     /*
     -1. Check route to task show exist
-    2. Check show task view exist
+    -2. Check show task view exist
     3. Check can see whole task data in show task view
     */

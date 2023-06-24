@@ -41,4 +41,7 @@
     @endforeach
 </ul>
 
+<ul class="pagination">{{ $tasks->links() }}</ul>
+
+
 @endsection

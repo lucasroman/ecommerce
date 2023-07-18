@@ -15,6 +15,8 @@
     {{-- Boostrap 5.3 CSS --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
+    {{-- Switchery 0.8.2 CSS --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -45,11 +47,14 @@
                                 <tbody>
                                     @foreach ($users as $user)
                                         <tr>
-                                            <th scope="row">{{$user->id}}</th>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->status }}</td>
-                                            <td>{{ $user->created_at            ->diffForHumans() }}</td>
+                                        <th scope="row">{{$user->id}}</th>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td><input type="checkbox" 
+                                            data-id ="{{ $user->id }}" 
+                                            name="status" 
+                                            class="js-switch" {{ $user->status == 1 ? 'checked':'' }}></td>
+                                        <td>{{ $user->created_at            ->diffForHumans() }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -57,7 +62,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </main>
@@ -66,5 +70,16 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     {{-- Boostrap 5.3 --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {{-- Switchery 0.8.2 --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
+
+    <script>
+        let elems = 
+            Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        
+        elems.forEach(function(html) {
+            let switchery = new Switchery(html, { size: 'small'});
+        });
+    </script>
 </body>
 </html>

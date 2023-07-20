@@ -50,6 +50,7 @@
                                         <th scope="row">{{$user->id}}</th>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
+                                        {{-- Use Elvis operator here --}}
                                         <td><input type="checkbox" 
                                             data-id ="{{ $user->id }}" 
                                             name="status" 
@@ -79,6 +80,23 @@
         
         elems.forEach(function(html) {
             let switchery = new Switchery(html, { size: 'small'});
+        });
+
+        $(document).ready(function() {
+            $('.js-switch').change(function() {
+                // Refactor with $user->status and $user-id
+                let status = $(this).prop('checked') === true ? 1 : 0;
+                let userId = $(this).data('id');
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: '{{ route('users.update.status') }}',
+                    data: {'status': status, 'user_id': userId },
+                    success: function (data) {
+                        console.log(data.message);
+                    }
+                });
+            });
         });
     </script>
 </body>

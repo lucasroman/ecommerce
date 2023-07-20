@@ -21,54 +21,60 @@
     {{-- Toaster 2.1.4 --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
-<body>
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Switch user status') }}
-            </a>
-        </div>
-    </nav>
 
-    <main class="py-4">
-        <div class="container">
-            <div class="row justy-content-center">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">User List</div>
-                        <div class="card-body">
-                            <table class="table table-hover table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Created</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($users as $user)
-                                        <tr>
-                                        <th scope="row">{{$user->id}}</th>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        {{-- Use Elvis operator here --}}
-                                        <td><input type="checkbox" 
-                                            data-id ="{{ $user->id }}" 
-                                            name="status" 
-                                            class="js-switch" {{ $user->status == 1 ? 'checked':'' }}></td>
-                                        <td>{{ $user->created_at            ->diffForHumans() }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+<body>
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url('/') }}">
+            {{ config('app.name', 'Switch user status') }}
+        </a>
+    </div>
+</nav>
+
+<main class="py-4">
+<div class="container">
+
+    <div class="row justy-content-center">
+        <div class="col-md-12">
+
+            <div class="card">
+            <div class="card-header">User List</div>
+            <div class="card-body">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Created</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($users as $user)
+                        <tr>
+                        <th scope="row">{{$user->id}}</th>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        {{-- Elvis operator:  --}}
+                        {{-- status === 0 => false, show status value --}}
+                        {{-- status === 1 => true, show 'checked' --}}
+                        <td><input type="checkbox" data-id ="{{ $user->id }}" 
+                            name="status" 
+                            class="js-switch" 
+                                {{ $user->status ?: 'checked' }}></td>
+                        <td>{{ $user->created_at->diffForHumans() }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
+            </div>
+            
         </div>
-    </main>
+    </div>
+</div>
+</main>
 
     {{-- JQuery 3.7.0 --}}
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
@@ -92,8 +98,7 @@
 
         $(document).ready(function() {
             $('.js-switch').change(function() {
-                // Refactor with $user->status and $user-id
-                let status = $(this).prop('checked') === true ? 1 : 0;
+                let status = $(this).prop('checked') ? 1 : 0;
                 let userId = $(this).data('id');
                 $.ajax({
                     type: "GET",

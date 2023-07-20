@@ -94,6 +94,6 @@ class UserController extends Controller
         $user->save();
 
         return response()
-            ->json(['message' => 'User status updated successfully.']);
+            ->json(['message' => "<b>$user->name</b> was updated."]);
     }
 }

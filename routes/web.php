@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [UserController::class, 'index']);
-// 
+
 // Update user state but using AJAX so dosen't need use post verb
 Route::get('/status/update', [UserController::class, 'updateStatus'])
     ->name('users.update.status');
+    

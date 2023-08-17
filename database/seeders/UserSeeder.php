@@ -6,6 +6,7 @@ use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 
 /* You can truncate tables in two ways:
 1. Use query builder:
@@ -33,7 +34,11 @@ class UserSeeder extends Seeder
             'name' => 'John Doe', 
             'alias' => 'Fulgore', 
             'email' => 'jdoe@example.com', 
+            'email_verified_at' => Carbon::now(),
+            'password' => bcrypt('admin'),
             'avatar' => 'No image file',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
     }
 }

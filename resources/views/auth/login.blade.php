@@ -6,20 +6,16 @@
         @csrf
 
         {{-- Default credentials (only local environment) --}}
-        @env('local')
-        @php
-            $defaultEmail = 'jdoe@example.com';
-            $defaultPassword = 'admin';
-        @endphp
-        @endenv
-
-        @env('production')
         @php
             $defaultEmail = '';
             $defaultPassword = '';
+        
+            if (app()->environment() === 'local') {
+                $defaultEmail = 'jdoe@example.com';
+                $defaultPassword = 'admin';
+            }
         @endphp
-        @endenv
-
+        
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />

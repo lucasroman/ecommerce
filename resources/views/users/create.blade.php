@@ -1,8 +1,5 @@
-@extends('layouts.app')
-
-@section('title', 'Create user')
-
-@section('content')
+<x-app-layout>
+    <div class="text-slate-400 p-4">
     <h3>Create user</h3>
 
     @if ($errors->any()) 
@@ -44,4 +41,4 @@
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
     </div>
-@endsection
+</x-app-layout>

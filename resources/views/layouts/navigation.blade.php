@@ -26,7 +26,7 @@
                     {{ Auth::user()->name }}
                 </summary>
                 <ul class="text-slate-500">
-                    <li><s>Edit</s></li>
+                    <li><a href="{{ route('users.edit') }}">Edit</a></li>
                     <li><a href="{{ route('logout') }}">Logout</a></li>
                 </ul>
             </details>

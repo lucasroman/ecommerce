@@ -43,4 +43,4 @@ Route::post('/dashboard/users', [UserController::class, 'store'])
     ->name('users.store');
 
 Route::get('/dashboard/users/edit', [ProfileController::class, 'edit'])
-    ->name('user.edit');
+    ->name('users.edit');

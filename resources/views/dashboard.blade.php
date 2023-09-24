@@ -14,5 +14,4 @@
             </div>
         </div>
     </div>
-    <a href="{{ route('user.edit') }}">Edit user</a>
 </x-app-layout>

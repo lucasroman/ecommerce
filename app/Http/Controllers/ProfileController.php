@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -32,6 +33,8 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
+        $request->avatar = $this->makeAvatarURI($request->file('avatar'), Str::title($request->name));
+        
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
@@ -56,5 +59,23 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    /**
+     * Auxiliar function to create avatar file name with its extension
+     * 
+     * @param $avatarFile is the avatar file name WITHOUT extension
+     * @param $username the name with which will be saved the file
+     * @return $avatarPath file path complete (see database)
+     */
+    public function makeAvatarURI($avatarFile, $username)
+    {
+        $avatar = $avatarFile;
+
+        $avatarExtension = '.' . $avatar->extension();
+
+        $avatarPath = $avatar->storeAs('public/avatars', Str::snake($username) . $avatarExtension);
+
+        return $avatarPath;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Support\Str;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -31,11 +32,12 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'John Doe', 
+            'name' => 'John Doe',
             'alias' => 'Fulgore', 
             'email' => 'jdoe@example.com', 
             'email_verified_at' => Carbon::now(),
             'password' => bcrypt('admin'),
+            'remember_token' => Str::random(10),
             'avatar' => 'No image file',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

@@ -18,6 +18,11 @@
                 </div>
             </div>
 
+            {{-- Avatar image --}}
+                <div class="text-white bg-auto mr-20 mt-2" style="width:3rem">
+                    <img src="{{url('avatars/' . Str::snake(Auth::user()->name) . '.jpg')}}" alt="Avatar" class="rounded-full">
+                </div>
+
             {{-- My dropdown menu replaced by Luke --}}
             
             <div class="max-w-lg mx-auto p-8 py-5 absolute right-0 inset-y-0">

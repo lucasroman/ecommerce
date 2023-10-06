@@ -69,9 +69,24 @@ return [
     |
     */
 
+    /*
+    Symbolic Links explanation:
+    It can't access to stored files from outside so you need create a link
+    to access them.
+
+    'key (direct access/name of link)' => 'Real path to your files'
+
+    public_path('myLink'): match with accesible public folder (app/public).
+
+    storage_path('app\public'): match with folders in YOUR disk 
+    (D:\laragon\www\ecommerce\storage\app\public) storage_path create the first 
+    part D:\laragon\www\ecommerce\storage\ so YOU DON'T HAVE INCLUDE IT.
+    Just put the part inside of 'storage' folder.
+
+    */
     'links' => [
         // app/public/storage  => app/storage/app/public
-        public_path('storage') => storage_path('app/public'),
+        public_path('avatars') => storage_path('app\public\avatars'),
     ],
 
 ];

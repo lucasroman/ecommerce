@@ -70,23 +70,36 @@ return [
     */
 
     /*
-    Symbolic Links explanation:
-    It can't access to stored files from outside so you need create a link
-    to access them.
+    Symbolic Links explanation (by Lucas Roman):
 
-    'key (direct access/name of link)' => 'Real path to your files'
+    Are directs access to the stored files, since these can't be accessed directly from outside, so you need create a links to these files.
 
-    public_path('myLink'): match with accesible public folder (app/public).
+    Associative array 'links':
 
-    storage_path('app\public'): match with folders in YOUR disk 
-    (D:\laragon\www\ecommerce\storage\app\public) storage_path create the first 
-    part D:\laragon\www\ecommerce\storage\ so YOU DON'T HAVE INCLUDE IT.
-    Just put the part inside of 'storage' folder.
+    'key (public_path)': Is the path to 'ecommerce/public' folder.
 
+    'value (storage_path)': Is the path to 'ecommerce/storage/app' folder.
+
+    The real files are stored in storage_path and the direct access in public_path.
+
+    For 'local' disk DON'T TRY TO SAVE FILES IN 'storage/app/public/avatars' the documentation says that but is wrong. Just save it in 'app/avatars'.
+
+    SHOW IMAGES IN VIEWS: to show image files in views use url() or asset() helpers. E.g.:
+
+    <img src="{{ url(Auth::user()->avatar) }}"> or
+    <img src="{{ asset(Auth::user()->avatar) }}
+
+    Note: press Ctrl + F5 if don't see image updated. Sometimes you seed cached views.
+
+    DATABASE FORMAT STORE:
+    For example for: 'avatar' column in your 'users' table you should save 'avatars/1.jpg'
+    
+    Use 'storeAs' function in controller to save with custom folder and custom name file.
     */
+
     'links' => [
         // app/public/storage  => app/storage/app/public
-        public_path('avatars') => storage_path('app\public\avatars'),
+        public_path('avatars') => storage_path('app\avatars'),
     ],
 
 ];

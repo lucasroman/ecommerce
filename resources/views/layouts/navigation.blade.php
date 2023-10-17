@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: true }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -17,16 +17,16 @@
                     </x-nav-link>
                 </div>
             </div>
-
-            {{-- Avatar image --}}
-                <div class="text-white bg-auto mr-20 mt-2" style="width:3rem">
-                    <img src="{{url('avatars/' . Str::snake(Auth::user()->name) . '.jpg')}}" alt="Avatar" class="rounded-full">
-                </div>
-
+            
+            
             {{-- My dropdown menu replaced by Luke --}}
             
             <div class="max-w-lg mx-auto p-8 py-5 absolute right-0 inset-y-0">
-            <details class="text-sm text-black open:ring-1 open:bg-white open:ring-black/5 text-slate-900 rounded-lg px-4">
+                {{-- Avatar image --}}
+                <div class="w-14">
+                    <img class="rounded-full" src="{{asset(Auth::user()->avatar)}}" alt="avatar">
+                </div>
+                <details class="text-sm text-black open:ring-1 open:bg-white open:ring-black/5 text-slate-900 rounded-lg px-4">
                 <summary class="select-none text-slate-400">
                     {{ Auth::user()->name }}
                 </summary>

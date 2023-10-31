@@ -21,21 +21,22 @@
             
             {{-- My dropdown menu replaced by Luke --}}
             
-            <div class="max-w-lg mx-auto p-8 py-5 absolute right-0 inset-y-0">
+            <div class="flex mx-auto m-1 absolute right-0 px-6">
                 {{-- Avatar image --}}
                 <div class="w-14">
                     <img class="rounded-full" src="{{asset(Auth::user()->avatar)}}" alt="avatar">
                 </div>
-                <details class="text-sm text-black open:ring-1 open:bg-white open:ring-black/5 text-slate-900 rounded-lg px-4">
-                <summary class="select-none text-slate-400">
-                    {{ Auth::user()->name }}
-                </summary>
-                <ul class="text-slate-500">
-                    <li><a href="{{ route('users.edit') }}">Edit</a></li>
-                    <li><a href="{{ route('logout') }}">Logout</a></li>
-                </ul>
-            </details>
+
+                <details class="mt-4 text-sm text-black open:ring-1 open:bg-white text-slate-900 rounded-lg mx-4 px-3 pb-2">
+                    <summary class="select-none text-slate-400" style="list-style:none">
+                        {{ Auth::user()->name }}
+                    </summary>
+
+                    <ul class="text-slate-500">
+                        <li><a href="{{ route('users.edit') }}">Edit</a></li>
+                        <li><a href="{{ route('logout') }}">Logout</a></li>
+                    </ul>
+                </details>
             </div>
-        </div>
     </div>
 </nav>

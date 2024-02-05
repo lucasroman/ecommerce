@@ -20,18 +20,17 @@
             
             
             {{-- My dropdown menu replaced by Luke --}}
-            
             <div class="flex mx-auto m-1 absolute right-0 px-6">
                 {{-- Avatar image --}}
                 <div class="w-14">
                     <img class="rounded-full" src="{{asset(Auth::user()->avatar)}}" alt="avatar">
                 </div>
-
                 <details class="mt-4 text-sm text-black open:ring-1 open:bg-white text-slate-900 rounded-lg mx-4 px-3 pb-2">
-                    <summary class="select-none text-slate-400" style="list-style:none">
+                    <summary class="select-none text-slate-400" style="list-style: none;">
+                        <i class="fa-regular fa-angle-right fa-xl"></i>
                         {{ Auth::user()->name }}
                     </summary>
-
+                    <h1>Test red</h1>
                     <ul class="text-slate-500">
                         <li><a href="{{ route('users.edit') }}">Edit</a></li>
                         <li><a href="{{ route('logout') }}">Logout</a></li>

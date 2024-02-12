@@ -144,6 +144,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'avatar' => [
+            'dimensions' => 'The :attribute must be 200x200 pixels.',
+        ],
     ],
 
     /*

@@ -1,3 +1,6 @@
+// It need add each React component to 'content' section below.
+// React will not rended tailwind colors otherwise.
+
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
@@ -6,6 +9,7 @@ module.exports = {
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        './resources/js/component.jsx',
     ],
 
     theme: {

@@ -20,7 +20,7 @@
             
             
             {{-- My dropdown menu replaced by Luke --}}
-            <div class="flex mx-auto m-1 absolute right-0 px-6">
+            <div class="flex mt-1 absolute right-0 px-6">
                 {{-- Avatar image --}}
                 <div class="w-14">
                     <img class="rounded-full" src="{{asset(Auth::user()->avatar)}}" alt="avatar">
@@ -30,7 +30,6 @@
                         <i class="fa-regular fa-angle-right fa-xl"></i>
                         {{ Auth::user()->name }}
                     </summary>
-                    <h1>Test red</h1>
                     <ul class="text-slate-500">
                         <li><a href="{{ route('users.edit') }}">Edit</a></li>
                         <li><a href="{{ route('logout') }}">Logout</a></li>

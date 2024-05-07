@@ -30,7 +30,9 @@
         {{-- <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}"> --}}
         <link rel="stylesheet" href="{{ asset('public/css/app.css') }}">
 
-
+        {{-- ReactJS load style and component --}}
+        @viteReactRefresh
+        @vite(['resources/css/app.css','resources/js/component.jsx'])
         
     </head>
     <body class="font-sans antialiased">

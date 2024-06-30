@@ -26,8 +26,10 @@
 </head>
 
 <body>
-    {{-- <Test /> --}}
-    <div id="app">CAUTION: React components aren't working :(</div>
+    <div id="app" data-users="{{$users}}">
+        CAUTION: React components aren't working 
+    </div>
+
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -64,7 +66,8 @@
                             {{-- Elvis operator:  --}}
                             {{-- status === 0 => false, show status value --}}
                             {{-- status === 1 => true, show 'checked' --}}
-                            <td><input type="checkbox" data-id ="{{ $user->id }}" 
+                            <td><input type="checkbox" 
+                                data-id ="{{ $user->id }}"  
                                 name="status" 
                                 class="js-switch" 
                                     {{ $user->status ?: 'checked' }}></td>

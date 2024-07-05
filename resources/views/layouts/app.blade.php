@@ -13,6 +13,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -25,12 +26,15 @@
                         {{ $header }}
                     </div>
                 </header>
-            @endif
+                @endif
+                
+                <!-- Page Content -->
+                <main>
+                    {{ $slot }}
+                </main>
+            </div>
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
+        {{-- It's necessary to work Tailwind drop down menu on Dashboard --}}
+        <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>

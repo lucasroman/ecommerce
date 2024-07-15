@@ -21,6 +21,7 @@ class ServiceSeeder extends Seeder
         // Add default a service
         DB::table('services')->insert([
             'name' => 'Aprende a tocar el piano',
+            'user_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

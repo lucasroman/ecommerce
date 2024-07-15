@@ -23,20 +23,20 @@ class UserSeeder extends Seeder
 
         // Add default user to users table
         DB::table('users')->insert([
-            'name' => 'John Doe',
-            'email' => 'jdoe@example.com',
+            'name' => 'Luke',
+            'email' => 'luke@example.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('1234'),
+            'password' => Hash::make('14164'),
             'remember_token' => Str::random(10),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Luke',
-            'email' => 'luke@example.com',
+            'name' => 'John Doe',
+            'email' => 'jdoe@example.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('14164'),
+            'password' => Hash::make('1234'),
             'remember_token' => Str::random(10),
             'created_at' => now(),
             'updated_at' => now(),

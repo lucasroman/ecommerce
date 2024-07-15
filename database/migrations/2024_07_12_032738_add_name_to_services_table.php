@@ -1,8 +1,10 @@
 <?php
 
+use Illuminate\Database\Console\TableCommand;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use League\CommonMark\Extension\Table\TableRow;
 
 return new class extends Migration
 {
@@ -15,6 +17,7 @@ return new class extends Migration
     {
         Schema::table('services', function (Blueprint $table) {
             $table->string('name')->after('id');
+            $table->integer('user_id')->after('name');
         });
     }
 
@@ -27,6 +30,7 @@ return new class extends Migration
     {
         Schema::table('services', function (Blueprint $table) {
             $table->dropColumn('name');
+            $table->dropColumn('user_id');
         });
     }
 };

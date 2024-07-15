@@ -15,8 +15,14 @@ class ServiceSeeder extends Seeder
      */
     public function run()
     {
+        // Truncate services table before fill it
+        DB::table('services')->truncate();
+
+        // Add default a service
         DB::table('services')->insert([
             'name' => 'Aprende a tocar el piano',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

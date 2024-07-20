@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Service;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ServiceSeeder extends Seeder
@@ -25,5 +25,7 @@ class ServiceSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        Service::factory()->count(4)->create();
     }
 }

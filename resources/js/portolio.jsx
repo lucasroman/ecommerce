@@ -1,3 +1,8 @@
 export default function Porfolio() {
-  return <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Portfolio on React</h2>;
+  return (
+    <>
+    <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Portfolio on React</h2>
+      <a href="/services">List of Services</a>
+    </>
+  )
 }

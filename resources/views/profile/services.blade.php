@@ -9,7 +9,13 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-gray-900 dark:text-gray-100">
-          {{ Auth::user()->services->pluck('name') }}
+          <ul>
+            @forelse (Auth::user()->services->pluck('name') as $service)
+              <li>{{$service}}</li>
+            @empty
+            There are not services yet. Why don't add one?
+            @endforelse
+          </ul>
         </div>
       </div>
     </div>

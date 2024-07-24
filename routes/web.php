@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Service;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,8 +24,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/services', function () {
-    return view('profile/services');
+    return view('profile.services');
 })->middleware(['auth', 'verified'])->name('services');
+
+Route::get('/service/{service}', function(Service $service) {
+    return view('profile.service', ['service' =>  $service]);
+})->name('service');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

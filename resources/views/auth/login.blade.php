@@ -1,7 +1,7 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
-
+    
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
@@ -39,9 +39,44 @@
                 </a>
             @endif
 
-            <x-primary-button class="ml-3">
+            <x-primary-button id="submit" class="ml-3">
                 {{ __('Log in') }}
-            </x-primary-button>
+            </x-primary-button>    
         </div>
+
+        @env('local')
+        {{-- Autologin just for test on local environment --}}
+        {{-- The code below won't show up on production environment --}}
+            <div class="text-white">
+                <button type="submit">
+                    <a id="first-user" class="text-white">
+                        Login as {{ App\Models\User::first()->name }}
+                    </a>
+                </button>
+                <br>
+                <button type="submit">
+                    <a id="second-user" class="text-white">
+                        Login as {{ App\Models\User::find(2)->name }}
+                    </a>
+                </button>
+            </div>
+        @endenv
     </form>
 </x-guest-layout>
+
+@env('local')
+    {{-- This code just appear on local environment --}}
+    {{-- Use JQuery to fill login form fields with users on database --}}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <script>
+        $('#first-user').on("click", function(event) {
+            $('#email').val('luke@example.com');
+            $('#password').val('14164');
+        });
+        $('#second-user').on("click", function(event) {
+            $('#email').val('jdoe@example.com');
+            $('#password').val('1234');
+        });
+    </script>
+@endenv

@@ -23,9 +23,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/services', function () {
-    return view('profile.services');
-})->middleware(['auth', 'verified'])->name('services');
+Route::get('/serviceslist', function () {
+    return view('profile.services-list');
+})->middleware(['auth', 'verified'])->name('serviceslist');
 
 Route::get('/service/{service}', function(Service $service) {
     return view('profile.service', ['service' =>  $service]);

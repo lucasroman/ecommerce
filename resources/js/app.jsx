@@ -11,7 +11,7 @@ Alpine.start();
 
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
-import Portfolio from './portolio';
+import Portfolio from './portfolio';
 
 ReactDOM.createRoot(document.getElementById('app')).render(
   <StrictMode>

@@ -17,9 +17,10 @@ class ServiceFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->sentence(5),
             // Fake service can belongs to user id 1 or 2
             'user_id' => $this->faker->numberBetween(1, 2),
+            'name' => $this->faker->sentence(5),
+            'description' => $this->faker->text(200),
         ];
     }
 }

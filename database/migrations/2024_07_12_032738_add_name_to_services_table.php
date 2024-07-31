@@ -16,8 +16,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('services', function (Blueprint $table) {
-            $table->string('name')->after('id');
-            $table->integer('user_id')->after('name');
+            $table->integer('user_id')->after('id');
+            $table->string('name')->after('user_id');
+            $table->text('description')->after('name');
         });
     }
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('user_id')->after('id');
             $table->string('name')->after('user_id');
             $table->text('description')->after('name');
+            $table->string('image')->after('description');
         });
     }
 
@@ -32,6 +33,8 @@ return new class extends Migration
         Schema::table('services', function (Blueprint $table) {
             $table->dropColumn('name');
             $table->dropColumn('user_id');
+            $table->dropColumn('description');
+            $table->dropColumn('image');
         });
     }
 };

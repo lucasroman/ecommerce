@@ -21,6 +21,7 @@ class ServiceFactory extends Factory
             'user_id' => $this->faker->numberBetween(1, 2),
             'name' => $this->faker->sentence(5),
             'description' => $this->faker->text(200),
+            'image' => 'https://picsum.photos/300/200',
         ];
     }
 }

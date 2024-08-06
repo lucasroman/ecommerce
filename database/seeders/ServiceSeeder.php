@@ -22,7 +22,11 @@ class ServiceSeeder extends Seeder
         DB::table('services')->insert([
             'user_id' => 1,
             'name' => 'Aprende a tocar el piano',
-            'description' => 'Praesent fermentum mattis nulla, nec maximus eros mattis in. Sed sodales, justo in pretium lacinia, lectus nisl molestie tellus, ac viverra eros velit nec nisl. Sed pellentesque in nunc at feugiat. Phasellus elementum pretium lacinia. Cras gravida sodales porta. Pellentesque pellentesque semper elementum. Curabitur dignissim sapien augue, in blandit nisi mollis eu. Morbi faucibus dui in lacus vehicula elementum. Mauris felis massa, congue ut dui sed, molestie aliquet urna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam auctor leo vitae interdum ultricies. Phasellus mattis porttitor diam. Praesent et tempus massa. Nunc elementum erat quis dolor blandit, id egestas quam volutpat. ',
+            'description' => 'Te traigo un gran curso de piano, tanto por su contenido como por su forma. He llevado especial cuidado en la claridad y el dinamismo de las lecciones, en que el resultado sea profesional, y donde condenso toda mi experiencia, tanto como músico de directo, como también en lo que se refiere a la docencia.
+
+
+En lo que se refiere al contenido online, me parece indispensable la calidad de imagen y sonido, así como también la progresión didáctica que siguen los contenidos, en la consecución de unos objetivos claros para el alumno. ',
+            'image' => 'services/piano.jpg',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

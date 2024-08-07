@@ -29,7 +29,7 @@ Route::get('/serviceslist', function () {
 
 Route::get('/service/{service}', function(Service $service) {
     return view('profile.service', ['service' =>  $service]);
-})->name('service');
+})->middleware(['auth', 'verified'])->name('service');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

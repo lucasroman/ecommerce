@@ -43,6 +43,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // Each user has many services
     public function services(): HasMany
     {
         return $this->hasMany(Service::class);

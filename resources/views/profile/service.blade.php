@@ -15,9 +15,11 @@
 
               {{-- Don't show chat button on your own services --}}
               @if ($service->user != Auth::user())
-                <x-primary-button id="submit" class="mt-4 items-center">
-                  {{ __('Chat with '. $service->user->name) }}
-                </x-primary-button>    
+                <a href="{{ route('chat', $service) }}">
+                  <x-primary-button id="submit" class="mt-4 items-center">
+                    {{ __('Chat with '. $service->user->name) }}
+                  </x-primary-button>    
+                </a>
               @endif
             </div>            
 

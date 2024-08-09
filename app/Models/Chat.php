@@ -10,6 +10,17 @@ class Chat extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     * 
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'owner',
+        'guest',
+        'message',
+    ];
+
     // Each chat belongs to one service
     function service(): BelongsTo 
     {

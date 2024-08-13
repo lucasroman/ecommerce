@@ -16,6 +16,7 @@ class Chat extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'service_id',
         'owner',
         'guest',
         'message',
@@ -24,6 +25,6 @@ class Chat extends Model
     // Each chat belongs to one service
     function service(): BelongsTo 
     {
-        return $this->belgonsTo(Service::class);
+        return $this->belongsTo(Service::class);
     }
 }

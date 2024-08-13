@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Service;
 use App\Models\Chat;
 use Illuminate\Http\Request;
@@ -25,7 +27,12 @@ class ChatController extends Controller
      */
     public function create(Service $service)
     {
-        return view('profile.chat', compact('service'));
+        // Check if exist previous chat
+        $messagesHistory = Chat::where('owner', $service->user)->get();
+        
+        return view('profile.chat', compact('service', 'messagesHistory'));
+        
+        
     }
 
     /**
@@ -37,13 +44,16 @@ class ChatController extends Controller
     public function store(Request $request)
     {
         $chat = new Chat([
-            'owner' => 'Test owner',
-            'guest' => 'Test guest',
-            'message' => 'Hi, this is a test message',
+            'service_id' => $request->serviceId,
+            'owner' => $request->owner,
+            'guest' => $request->guest,
+            'message' => $request->message,
         ]);
-        // owner, guest, message   
+        echo ('Made chat instance');
+        // service id, owner, guest, message   
         $chat->save();
-        return response()->json($chat);
+
+        return back();
     }
 
     /**

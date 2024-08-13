@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
                     
-                        <div id="app">ReactJS Entry Point Here</div>
+                        <div id="app">Rendering React component...</div>
                     
                 </div>
             </div>

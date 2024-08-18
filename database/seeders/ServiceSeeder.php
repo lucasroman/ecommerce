@@ -21,7 +21,7 @@ class ServiceSeeder extends Seeder
         // Add default a service
         DB::table('services')->insert([
             'user_id' => 1,
-            'name' => 'Aprende a tocar el piano',
+            'name' => 'Aprende a tocar el piano.',
             'description' => 'Te traigo un gran curso de piano, tanto por su contenido como por su forma. He llevado especial cuidado en la claridad y el dinamismo de las lecciones, en que el resultado sea profesional, y donde condenso toda mi experiencia, tanto como músico de directo, como también en lo que se refiere a la docencia.
 
 

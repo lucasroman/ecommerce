@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
-            $table->integer('service_id');
-            $table->string('owner');
-            $table->string('guest');
+            $table->foreignId('service_id');
+            $table->integer('owner');
+            $table->integer('guest');
             $table->string('message');
+            $table->boolean('speaker');
             $table->timestamps();
         });
     }

@@ -20,6 +20,7 @@ class Chat extends Model
         'owner',
         'guest',
         'message',
+        'speaker',
     ];
 
     // Each chat belongs to one service

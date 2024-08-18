@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChatController;
-use App\Models\Service;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,23 +24,24 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Services
-Route::get('/serviceslist', function () {
-    return view('profile.services-list');
-})->middleware(['auth', 'verified'])->name('serviceslist');
+// Services ------------------------------------------------------------
 
-Route::get('/service/{service}', function(Service $service) {
-    return view('profile.service', ['service' =>  $service]);
-})->middleware(['auth', 'verified'])->name('service');
+Route::get('/serviceslist', [ServiceController::class, 'index'])
+->middleware(['auth', 'verified'])->name('services.index');
 
-// Chat Get
-Route::get('/service/{service}/chats', [ChatController::class, 'create'])->middleware(['auth', 'verified'])->name('chat');
+Route::get('/service/{user}/{service}', [ServiceController::class, 'show'])
+->middleware(['auth', 'verified'])->name('services.show');
+
+// Chat Get ------------------------------------------------------------
+
+Route::get('/service/{service}/chat', [ChatController::class, 'show'])->middleware(['auth', 'verified'])->name('chats.show');
 
 // Chat Post
 Route::post('/service/chat', [ChatController::class, 'store'])
-    ->name('chat.store');
+    ->name('chats.store');
 
-// Authentication
+// Authentication ------------------------------------------------------
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

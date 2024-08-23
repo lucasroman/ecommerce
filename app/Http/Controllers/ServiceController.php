@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Service;
+use App\Models\Chat;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -14,7 +17,14 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        // Get all services of current user logged
+        $servicesOfOwner = Service::where('user_id', Auth::user()->id)
+            ->get();
+
+        $servicesOfOthers = Service::where('user_id', '!=', Auth::user()->id)
+            ->get();
+
+        return view('profile.services-list', compact('servicesOfOwner', 'servicesOfOthers'));
     }
 
     /**
@@ -46,7 +56,30 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        //
+        /**
+         * 1. Auth->Owner: no button (there're no chats) or chats list buttons
+         * 2. Auth->Guest: chat with Owner button
+         */ 
+
+        // If logged user is the service's owner 
+        if (Auth::user() == $service->user) {
+
+            // Get ids of guests talking on this service 
+            $guestsIds = Chat::where('owner', $service->user->id)
+                ->get()->unique('guest')->pluck('guest');
+
+            // Get respective users from their guests ids
+            $guests = [];
+
+            foreach ($guestsIds as $guestId) {
+                array_push($guests, User::find($guestId)->name);
+            }
+        } else {
+            // I'm a guest in the service
+        }
+
+        return view('profile.service', compact(
+            'service', 'guests'));
     }
 
     /**

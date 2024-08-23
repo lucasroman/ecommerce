@@ -17,5 +17,29 @@ class ChatSeeder extends Seeder
     {
         // Tuncate chats table
         Chat::truncate();
+
+        Chat::create([
+            'service_id' => 1,
+            'owner' => 1,
+            'guest' => 2,
+            'message' => "Hi I'm Jhon",
+            'speaker' => 1, // 0 = Speak Onwer | 1 = Speak Guest
+        ]);
+
+        Chat::create([
+            'service_id' => 1,
+            'owner' => 1,
+            'guest' => 2,
+            'message' => "Hi Jhon, I'm Luke. Do you want learn to play piano?",
+            'speaker' => 0, // 0 = Speak Onwer | 1 = Speak Guest
+        ]);
+
+        Chat::create([
+            'service_id' => 1,
+            'owner' => 1,
+            'guest' => 3,
+            'message' => "My name is Maria. How much for piano lessons?",
+            'speaker' => 1, // 0 = Speak Onwer | 1 = Speak Guest
+        ]);
     }
 }

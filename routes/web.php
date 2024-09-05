@@ -29,12 +29,12 @@ Route::get('/dashboard', function () {
 Route::get('/serviceslist', [ServiceController::class, 'index'])
 ->middleware(['auth', 'verified'])->name('services.index');
 
-Route::get('/service/{user}/{service}', [ServiceController::class, 'show'])
+Route::get('/services/{service}', [ServiceController::class, 'show'])
 ->middleware(['auth', 'verified'])->name('services.show');
 
 // Chat Get ------------------------------------------------------------
 
-Route::get('/service/{service}/chat', [ChatController::class, 'show'])->middleware(['auth', 'verified'])->name('chats.show');
+Route::get('/service/{service}/chat/{guest}', [ChatController::class, 'show'])->middleware(['auth', 'verified'])->name('chats.show');
 
 // Chat Post
 Route::post('/service/chat', [ChatController::class, 'store'])

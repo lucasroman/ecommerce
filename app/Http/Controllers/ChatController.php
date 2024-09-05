@@ -27,12 +27,7 @@ class ChatController extends Controller
      */
     public function create(Service $service)
     {
-        // Check if exist previous chat
-        $messagesHistory = Chat::where('owner', $service->user)->get();
-        
-        return view('profile.chat', compact('service', 'messagesHistory'));
-        
-        
+        //
     }
 
     /**
@@ -43,17 +38,18 @@ class ChatController extends Controller
      */
     public function store(Request $request)
     {
-        $chat = new Chat([
-            'service_id' => $request->serviceId,
-            'owner' => $request->owner,
-            'guest' => $request->guest,
-            'message' => $request->message,
-        ]);
-        echo ('Made chat instance');
-        // service id, owner, guest, message   
-        $chat->save();
-
-        return back();
+            $chat = Chat::create([
+                'service_id' => $request->serviceId,
+                'owner' => $request->owner,
+                'guest' => $request->guest,
+                'message' => $request->message,
+                'speaker' => $request->speaker,
+            ]);
+            
+            // service id, owner, guest, message   
+            $chat->save();
+    
+            return back();
     }
 
     /**
@@ -62,9 +58,18 @@ class ChatController extends Controller
      * @param  \App\Models\Chat  $chat
      * @return \Illuminate\Http\Response
      */
-    public function show(Chat $chat)
+    public function show(Service $service, User $guest)
     {
-        //
+        // Get the service's owner
+        $owner = $service->user;        
+        
+        // Recover all chat messages for this conversation
+        $chat = Chat::where('service_id', $service->id)
+            ->where('owner', $owner->id)
+            ->where('guest', $guest->id)->get();
+        
+        return view('profile.chat', 
+            compact('service', 'chat', 'owner', 'guest'));
     }
 
     /**

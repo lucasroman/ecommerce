@@ -14,7 +14,7 @@
           <ul>
             @forelse ($servicesOfOwner as $service)
               <li>
-                <a href="#">
+                <a href="{{route('services.show', $service)}}">
                   {{$service->name}} <i>By {{$service->user->name}}.</i>
                 </a>
               </li>
@@ -33,7 +33,7 @@
           <ul>
             @forelse($servicesOfOthers as $service)
               <li>
-                <a href="#">
+                <a href="{{route('services.show', $service)}}">
                   {{$service->name}} <i>By {{$service->user->name}}.</i>
                 </a>
               </li>

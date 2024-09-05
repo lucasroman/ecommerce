@@ -13,16 +13,27 @@
             <div class="" style="margin-top:-7px">
               <p>{{$service->description}}</p>
 
-              {{-- Don't show chat button on your own services --}}
-              @if ($service->user != Auth::user())
-                <a href="{{ route('chat', $service) }}">
-                  <x-primary-button id="submit" class="mt-4 items-center">
-                    {{ __('Chat with '. $service->user->name) }}
-                  </x-primary-button>    
-                </a>
+              {{-- Show chats buttons foreach guests that contacted 
+                to the owner --}}
+              @if (Auth::user() == $service->user)
+                @foreach ($guests as $guest) 
+                  <div class="my-4">
+                    <a href="{{ route('chats.show', [$service, $guest]) }}">
+                      <x-primary-button>
+                        Chat with {{$guest->name}}
+                      </x-primary-button>
+                    </a>
+                  </div>
+                @endforeach
+              {{-- Show only one button for chat with the service's owner --}}
+              @else
+                  <a href="{{ route('chats.show', [$service, Auth::user()])}}">
+                    <x-primary-button id="submit" class="mt-4 items-center">
+                      {{ __('Chat with '. $service->user->name) }}
+                    </x-primary-button>    
+                  </a>  
               @endif
             </div>            
-
           </div>      
         </div>
       </div>

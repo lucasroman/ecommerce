@@ -64,9 +64,17 @@ class ChatController extends Controller
         $owner = $service->user;        
         
         // Recover all chat messages for this conversation
+
+        /** 
+         * NOTE: the chat messages are recovered in order inverse to see last
+         * message on page 1 and first message on last page. But it's necessary
+         * reverse messages again on the view (see reverse on chat view) to
+         * sort them right.
+         */
         $chat = Chat::where('service_id', $service->id)
             ->where('owner', $owner->id)
-            ->where('guest', $guest->id)->get();
+            ->where('guest', $guest->id)
+            ->latest()->paginate(15);
         
         return view('profile.chat', 
             compact('service', 'chat', 'owner', 'guest'));

@@ -8,8 +8,9 @@
         </div>
         
         <div class="m-3 w-1/3 bg-slate-500 rounded-lg p-4 grid ">            
+          
           {{-- Show history chat messages --}}
-          @foreach ($chat as $msg)          
+          @foreach ($chat->reverse() as $msg)          
               @if ($msg->speaker)
                 <div class="size-fit rounded-lg mb-2 p-2 bg-slate-300 shadow-xl text-black clear-end">
                   
@@ -24,7 +25,12 @@
                 </div>
                 @endif
           @endforeach
-          
+
+          {{-- Messages pagination numbers --}}
+          <div class="my-3">
+            {{ $chat->links() }}
+          </div>
+
           {{-- Input chat message --}}
 
           <form action="{{route('chats.store')}}" method="post">
@@ -35,7 +41,7 @@
             <input type="hidden" name="speaker" 
               value="{{(Auth::user()->id === $service->user_id) ? 0 : 1}}">
             <div class="text-center flex">
-              <input type="text" name="message" class="rounded-lg block w-full">
+              <input type="text" name="message" class="rounded-lg block w-full" autofocus>
               <x-primary-button type="submit" class="ml-3 clear-end ">
                   Send
               </x-primary-button>

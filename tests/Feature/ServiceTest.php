@@ -2,12 +2,15 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ServiceTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * A basic feature test example.
      *
@@ -18,5 +21,16 @@ class ServiceTest extends TestCase
         $response = $this->get('/');
 
         $response->assertStatus(200);
+    }
+
+    public function testListOfServicesShowsAllKindOfServices(): void 
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get('/serviceslist');
+
+        $response->assertSeeText('My services');
+
+        $response->assertSeeText('Community services');
     }
 }

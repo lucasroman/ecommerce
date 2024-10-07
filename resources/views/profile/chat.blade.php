@@ -40,13 +40,24 @@
             <input type="hidden" name="guest" value="{{$guest->id}}">
             <input type="hidden" name="speaker" 
               value="{{(Auth::user()->id === $service->user_id) ? 0 : 1}}">
-            <div class="text-center flex">
-              <input type="text" name="message" class="rounded-lg block w-full" autofocus>
-              <x-primary-button type="submit" class="ml-3 clear-end ">
-                  Send
-              </x-primary-button>
-            </div>
-          </form>
+
+              
+              <div class="text-center flex">
+                <input type="text" name="message" class="rounded-lg block w-full" autofocus>
+
+                <x-primary-button class="ml-3 clear-end">
+                  <input id="file" type="file" class="hidden">
+                  <label for="file">
+                    <i class="fa-solid fa-paperclip"></i>
+                  </label>
+                </x-primary-button>
+                
+                <x-primary-button type="submit" class="ml-3 clear-end">
+                  <i class="fa-solid fa-paper-plane-top fa-2xl"></i>
+                </x-primary-button>
+              </div>
+            </form>
+            
 
         </div>
       </div>

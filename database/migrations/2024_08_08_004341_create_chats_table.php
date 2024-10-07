@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('service_id');
             $table->integer('owner');
             $table->integer('guest');
-            $table->string('message');
+            $table->string('message')->nullable();
             $table->boolean('speaker');
             $table->timestamps();
         });

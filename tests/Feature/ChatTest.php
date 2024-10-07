@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -10,6 +11,18 @@ use Tests\TestCase;
 
 class ChatTest extends TestCase
 {
+    use RefreshDatabase;
+
+    public function setUp() : void 
+    {
+        parent::setUp();
+
+        $this->user1 = User::create([
+           'name' => 'Test name',
+           'email' => 'test@eamil.com',
+           'password' => 'myPass',
+        ]);
+    }
     /**
      * A basic feature test example.
      *
@@ -25,14 +38,14 @@ class ChatTest extends TestCase
     // Users can upload files
     public function testUsersCanUploadFiles() : void 
     {
-        Storage::fake('files');
+        Storage::fake('uploads');
 
         $file = UploadedFile::fake()->create('file.mp3');
 
-        $response = $this->post('/service/chat', [
+        $this->post('/service/chat', [
             'file' => $file,
         ]);
 
-        Storage::disk('files')->assertExists($file->hasName());
+        Storage::disk('uploads')->assertExists($file->hasName());
     }
 }

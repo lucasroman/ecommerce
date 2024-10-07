@@ -11,6 +11,9 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        {{-- Font Awesome Pro 6.2.0 --}}
+        <link rel="stylesheet" href="https://atugatran.github.io/FontAwesome6Pro/css/all.min.css" >
+
         <!-- Scripts -->
         @viteReactRefresh
         @vite(['resources/css/app.css', 'resources/js/app.jsx'])

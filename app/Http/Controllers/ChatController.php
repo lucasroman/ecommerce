@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Service;
@@ -38,18 +39,27 @@ class ChatController extends Controller
      */
     public function store(Request $request)
     {
-            $chat = Chat::create([
-                'service_id' => $request->serviceId,
-                'owner' => $request->owner,
-                'guest' => $request->guest,
-                'message' => $request->message,
-                'speaker' => $request->speaker,
-            ]);
-            
-            // service id, owner, guest, message   
-            $chat->save();
-    
-            return back();
+        /**
+         * 1. Check if attachFile isn't empty.
+         * 2. If not empty save file.
+         * 3.  
+         */
+
+        $path = Storage::putFile('files', $request->file('attachFile'));
+
+        $chat = Chat::create([
+            'service_id' => $request->serviceId,
+            'owner' => $request->owner,
+            'guest' => $request->guest,
+            'message' => $request->message,
+            'speaker' => $request->speaker,
+            'attachFile' => $path,
+        ]);
+        
+        // service id, owner, guest, message   
+        $chat->save();
+
+        return back();
     }
 
     /**

@@ -22,6 +22,8 @@
                   <p><b>{{$owner->name}}</b> 
                     ({{$msg->created_at->diffForHumans()}})</p>
                     {{$msg->message}}
+                    @php use Illuminate\Support\Facades\Storage; @endphp
+                    {{ return Storage::download($msg->attachFile)}}
                 </div>
                 @endif
           @endforeach
@@ -33,7 +35,7 @@
 
           {{-- Input chat message --}}
 
-          <form action="{{route('chats.store')}}" method="post">
+          <form action="{{route('chats.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="serviceId" value="{{$service->id}}">
             <input type="hidden" name="owner" value="{{$owner->id}}">
@@ -45,16 +47,20 @@
               <div class="text-center flex">
                 <input type="text" name="message" class="rounded-lg block w-full" autofocus>
 
-                <x-primary-button class="ml-3 clear-end">
-                  <input id="file" type="file" class="hidden">
-                  <label for="file">
-                    <i class="fa-solid fa-paperclip"></i>
-                  </label>
-                </x-primary-button>
                 
-                <x-primary-button type="submit" class="ml-3 clear-end">
+                <div class="ml-3 clear-end border border-2 border-slate-600 rounded-none rounded-l-lg bg-slate-200">
+                  <label for="file">
+                    <i class="fa-solid fa-paperclip fa-2xl p-3 mt-1.5 text-slate-800">
+                    <input id="file" type="file" name="attachFile" class="hidden"></i>
+                  </label>
+                </div>
+
+                {{-- </x-primary-button> --}}
+                <x-primary-button type="submit" class="clear-end border border-y-2 border-r-2 border-slate-600 rounded-none rounded-r-lg">
                   <i class="fa-solid fa-paper-plane-top fa-2xl"></i>
                 </x-primary-button>
+              </div>
+
               </div>
             </form>
             

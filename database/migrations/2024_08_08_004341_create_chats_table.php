@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('guest');
             $table->string('message')->nullable();
             $table->boolean('speaker');
+            $table->string('attachFile')->nullable();
             $table->timestamps();
         });
     }

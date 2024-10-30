@@ -70,7 +70,8 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),        
+        // public_path('storage') => storage_path('app/public'),        
         public_path('services') => storage_path('app\public\services'),
+        public_path('files') => storage_path('app\public\files'),
         ],
 ];

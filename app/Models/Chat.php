@@ -21,6 +21,7 @@ class Chat extends Model
         'guest',
         'message',
         'speaker',
+        'attachFile',
     ];
 
     // Each chat belongs to one service

@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
@@ -38,14 +38,23 @@ class ChatTest extends TestCase
     // Users can upload files
     public function testUsersCanUploadFiles() : void 
     {
-        Storage::fake('uploads');
+        // Fake folder where upload files
+        Storage::fake('files');
 
+        // Create an example file
         $file = UploadedFile::fake()->create('file.mp3');
-
+        
+        // Send file from chat 
         $this->post('/service/chat', [
-            'file' => $file,
+            'serviceId' => 1,
+            'owner' => 1,
+            'guest' => 2,
+            'speaker' => 2,
+            'attachFile' => $file,
         ]);
-
-        Storage::disk('uploads')->assertExists($file->hasName());
+        
+        // Check that file exist
+        // storage_path return: 'D:\laragon\www\ecommerce\storage'
+        $this->assertFileExists(storage_path('app/files/') . $file->hashName());
     }
 }

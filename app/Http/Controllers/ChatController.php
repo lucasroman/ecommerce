@@ -39,12 +39,6 @@ class ChatController extends Controller
      */
     public function store(Request $request)
     {
-        /**
-         * 1. Check if attachFile isn't empty.
-         * 2. If not empty save file.
-         * 3.  
-         */
-
         // Path to attached file (if exist that file)
         $path = null;
 

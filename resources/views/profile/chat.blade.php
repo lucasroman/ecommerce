@@ -24,6 +24,13 @@
                     {{$msg->message}}
                 </div>
                 @endif
+
+                @if ($msg->attachFile !== null) 
+                  <a href="{{route('download', $msg->attachFile)}}">
+                    <i class="fa-sharp fa-thin fa-file fa-xl" 
+                      style="color: #fdfdfd;"></i>
+                  </a>
+                @endif
           @endforeach
 
           {{-- Messages pagination numbers --}}

@@ -123,4 +123,12 @@ class ChatController extends Controller
     {
         //
     }
+
+    public function download(String $filename) {
+
+        // dd(Storage::url($filename));
+        
+        return Storage::download(storage_path('app/files/'. $filename));
+
+    }
 }

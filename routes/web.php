@@ -36,6 +36,9 @@ Route::get('/services/{service}', [ServiceController::class, 'show'])
 
 Route::get('/service/{service}/chat/{guest}', [ChatController::class, 'show'])->middleware(['auth', 'verified'])->name('chats.show');
 
+Route::get('/download/files/{filename}', [ChatController::class, 'download'])
+    ->name('download');
+
 // Chat Post
 Route::post('/service/chat', [ChatController::class, 'store'])
     ->name('chats.store');

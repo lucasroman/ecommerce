@@ -57,4 +57,17 @@ class ChatTest extends TestCase
         // storage_path return: 'D:\laragon\www\ecommerce\storage'
         $this->assertFileExists(storage_path('app/files/') . $file->hashName());
     }
+
+    // Users can download files
+    public function testUsersCanDownloadFiles() : void
+    {
+        // get of url to download, with argument filename
+
+        $filename = 'song.mp3';
+
+        $response = $this->get('download/files/' . $filename);
+
+        $response->assertDownload();
+
+    }
 }

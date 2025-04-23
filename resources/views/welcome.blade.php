@@ -22,7 +22,13 @@
     </head>
     <body class="antialiased">
         {{-- Cover image "Services on Click!" --}}
-        <img src="{{ asset('storage/images/cover.png') }}" alt="cover image">
+        <img src="{{ asset('storage/images/cover.png') }}" alt="cover image"
+            style="
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                width: 100%;
+        ">
 
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))

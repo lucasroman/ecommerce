@@ -4,7 +4,7 @@
       <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-gray-900 dark:text-gray-100">
           <h1 class="text-2xl mb-4">{{$service->name}}</h1>
-
+          
           <div class="flex">
             <div class="flex-none mr-4">
               <img src="{{asset($service->image)}}" alt="image service">
